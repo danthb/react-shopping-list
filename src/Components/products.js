@@ -77,7 +77,7 @@ const products = [
     }
   };
   
- export default function Products  (props) {
+ export default function Products  (/* props */) {
     const [items, setItems] = React.useState(products);
     const [cart, setCart] = React.useState([]);
     /* const [total, setTotal] = React.useState(0); */
@@ -108,9 +108,6 @@ const products = [
       } else {
         alert(`there is not ${name}`)
       }
-      
-
-
       //doFetch(query);
 
     };
