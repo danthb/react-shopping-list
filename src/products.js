@@ -18,7 +18,7 @@ const products = [
   } */
   
   const useDataApi = (initialUrl, initialData) => {
-    const { useState, useEffect, useReducer } = React;
+
     const [url, setUrl] = useState(initialUrl);
   
     const [state, dispatch] = useReducer(dataFetchReducer, {
@@ -33,7 +33,7 @@ const products = [
       const fetchData = async () => {
         dispatch({ type: "FETCH_INIT" });
         try {
-          const result = await axios(url);
+          const result = await axios.get(url);
           console.log("FETCH FROM URl");
           if (!didCancel) {
             dispatch({ type: "FETCH_SUCCESS", payload: result.data });
@@ -132,7 +132,7 @@ const products = [
         <li key={index}>
           <Image src={url} width={70} roundedCircle></Image>
           <Button variant="primary" size="large">
-          {item.name}:{item.cost}  - Stock: {item.instock}
+          {item.name}: {item.cost}  -  Stock: {item.instock}
           </Button>
           <input name={item.name} type="submit" onClick={addToCart}></input>
         </li>
@@ -158,10 +158,12 @@ const products = [
       let total = checkOut();
       let final = cart.map((item, index) => {
         return (
-
-        <div key={index} index={index}>
+          <Fragment>
+          <div key={index} index={index}>
             {item.name}
           </div>
+          </Fragment>
+
 
         );
       });
@@ -178,7 +180,7 @@ const products = [
     // TODO: implement the restockProducts function
     const restockProducts = (url) => {
     doFetch(url);
-    let newItems = data.map((item) => {
+    let newItems =data.map((item) => {
       let { name, country, cost, instock } = item;
       return { name, country, cost, instock }
     });
@@ -189,13 +191,13 @@ const products = [
         <Row>
           <Col>
             <h1>Product List</h1>
-            <ul style={{ listStyleType: "none" }}>{list}</ul>
+            <ul eventkey='0' style={{ listStyleType: "none" }}>{list}</ul>
           </Col>
           <Col>
             <h1>Cart Contents</h1>
             <Accordion defaultActiveKey='0'>
-            <Accordion.Item eventKey='0'>
-              <Accordion.Body eventKey='0'>{cartList}</Accordion.Body>
+            <Accordion.Item eventkey='0'>
+              <Accordion.Body eventkey='0'>{cartList}</Accordion.Body>
             </Accordion.Item>
             </Accordion>
           </Col>
@@ -218,7 +220,7 @@ const products = [
               value={query}
               onChange={(event) => setQuery(event.target.value)}
             />
-            <button type="submit">ReStock Products</button>
+            <button type="submit" id='restock' name='restock products'>ReStock Products</button>
           </form>
         </Row>
       </Container>

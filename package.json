@@ -21,9 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "jest": {
-    "clearMocks": true
-  },
+
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -43,6 +41,10 @@
     ]
   },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3"
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "axios-mock-adapter": "^1.20.0"
+  },
+  "jest": {
+    "clearMocks": true
   }
 }
